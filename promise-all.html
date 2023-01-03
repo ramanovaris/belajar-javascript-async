@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Promise</title>
+    <title>Promise All</title>
   </head>
   <body>
     <table>
@@ -40,20 +40,11 @@
         });
       }
 
-      getProducts("product")
-        .then(function (response) {
-          return JSON.parse(response);
-        })
-        .then(function (json) {
-          document.getElementById("id").textContent = json.id;
-          document.getElementById("name").textContent = json.name;
-          document.getElementById("price").textContent = json.price;
-        })
-        .catch(function (error) {
-          document.getElementById("id").textContent = error;
-          document.getElementById("name").textContent = error;
-          document.getElementById("price").textContent = error;
-        });
+      const promise = Promise.all([getProducts("product1"), getProducts("product2"), getProducts("product3")]);
+
+      promise.then(function (products) {
+        console.info(products);
+      });
     </script>
   </body>
 </html>
